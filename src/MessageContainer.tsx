@@ -342,7 +342,7 @@ export default class MessageContainer<
           : null}
         <FlatList
           ref={this.props.forwardRef}
-          extraData={[this.props.extraData, this.props.isTyping]}
+          extraData={{...this.props.extraData, isTyping: this.props.isTyping}}
           keyExtractor={this.keyExtractor}
           enableEmptySections
           automaticallyAdjustContentInsets={false}
