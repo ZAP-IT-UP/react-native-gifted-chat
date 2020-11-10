@@ -44,6 +44,7 @@ export interface MessageProps<TMessage extends IMessage> {
   renderBubble?(props: Bubble['props']): React.ReactNode
   renderDay?(props: Day['props']): React.ReactNode
   renderSystemMessage?(props: SystemMessage['props']): React.ReactNode
+  renderMessageWrapper?(props: any): React.ReactNode
   renderAvatar?(props: Avatar['props']): React.ReactNode
   shouldUpdateMessage?(
     props: MessageProps<IMessage>,
@@ -59,6 +60,7 @@ export default class Message<
     renderBubble: null,
     renderDay: null,
     renderSystemMessage: null,
+    renderMessageWrapper: null,
     position: 'left',
     currentMessage: {},
     nextMessage: {},
@@ -76,6 +78,7 @@ export default class Message<
     renderBubble: PropTypes.func,
     renderDay: PropTypes.func,
     renderSystemMessage: PropTypes.func,
+    renderMessageWrapper: PropTypes.func,
     position: PropTypes.oneOf(['left', 'right']),
     currentMessage: PropTypes.object,
     nextMessage: PropTypes.object,
@@ -171,7 +174,7 @@ export default class Message<
     return <Avatar {...props} />
   }
 
-  render() {
+  renderMessageWrapper() {
     const { currentMessage, nextMessage, position, containerStyle } = this.props
     if (currentMessage) {
       const sameUser = isSameUser(currentMessage, nextMessage!)
@@ -198,5 +201,22 @@ export default class Message<
       )
     }
     return null
+  }
+
+  render() {
+    if (this.props.renderMessageWrapper) {
+      const props = {
+        renderSystemMessage: this.renderSystemMessage,
+        renderBubble: this.renderBubble,
+        renderAvatar: this.renderAvatar,
+        isSameUser: isSameUser,
+        styles: styles,
+        props: this.props
+      }
+
+      return this.props.renderMessageWrapper(props)
+    }
+
+    return this.renderMessageWrapper()
   }
 }
