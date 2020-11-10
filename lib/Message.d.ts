@@ -13,6 +13,7 @@ export interface MessageProps<TMessage extends IMessage> {
     currentMessage?: TMessage;
     nextMessage?: TMessage;
     previousMessage?: TMessage;
+    extraData?: any;
     user: User;
     inverted?: boolean;
     containerStyle?: LeftRightStyle<ViewStyle>;
@@ -34,6 +35,7 @@ export default class Message<TMessage extends IMessage = IMessage> extends React
         currentMessage: {};
         nextMessage: {};
         previousMessage: {};
+        extraData: null;
         user: {};
         containerStyle: {};
         showUserAvatar: boolean;

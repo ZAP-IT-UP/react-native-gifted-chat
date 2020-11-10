@@ -243,6 +243,7 @@ export default class MessageContainer<
         inverted,
         nextMessage,
         position: item.user._id === user._id ? 'right' : 'left',
+        extraData: this.props.extraData
       }
 
       if (this.props.renderMessage) {
@@ -342,7 +343,7 @@ export default class MessageContainer<
           : null}
         <FlatList
           ref={this.props.forwardRef}
-          extraData={{...this.props.extraData, isTyping: this.props.isTyping}}
+          extraData={[this.props.extraData, this.props.isTyping]}
           keyExtractor={this.keyExtractor}
           enableEmptySections
           automaticallyAdjustContentInsets={false}
