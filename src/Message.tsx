@@ -205,17 +205,7 @@ export default class Message<
 
   render() {
     if (this.props.renderMessageWrapper) {
-      const props = {
-        renderDay: this.renderDay,
-        renderSystemMessage: this.renderSystemMessage,
-        renderBubble: this.renderBubble,
-        renderAvatar: this.renderAvatar,
-        isSameUser: isSameUser,
-        styles: styles,
-        props: this.props
-      }
-
-      return this.props.renderMessageWrapper(props)
+      return this.props.renderMessageWrapper.call(this, {isSameUser, styles})
     }
 
     return this.renderMessageWrapper()
