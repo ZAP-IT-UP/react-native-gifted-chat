@@ -206,6 +206,7 @@ export default class Message<
   render() {
     if (this.props.renderMessageWrapper) {
       const props = {
+        renderDay: this.renderDay,
         renderSystemMessage: this.renderSystemMessage,
         renderBubble: this.renderBubble,
         renderAvatar: this.renderAvatar,
