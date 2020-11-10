@@ -207,7 +207,7 @@ export default class Message<
 
   render() {
     if (this.props.renderMessageWrapper) {
-      return this.props.renderMessageWrapper.call(this, {isSameUser, styles})
+      return this.props.renderMessageWrapper.call(this, {isSameUser, styles, extraData: this.props.extraData})
     }
 
     return this.renderMessageWrapper()
